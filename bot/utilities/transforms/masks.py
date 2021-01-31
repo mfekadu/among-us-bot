@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 
+
 def rgb_to_hsv(focus_window):
     hsv = cv2.cvtColor(focus_window, cv2.COLOR_RGB2HSV)
     print(hsv)
@@ -22,16 +23,12 @@ def hsv_map_masked(game_window):
     return mask
 
 
-
-
 #                            H    S    V
-RED_PLAYER_LOWER = np.array([100, 200, 140])
-RED_PLAYER_UPPER = np.array([130, 255, 200])
+RED_PLAYER_MARKER_MASK_LOWER = np.array([100, 200, 140])
+RED_PLAYER_MARKER_MASK_UPPER = np.array([130, 255, 200])
 
-def rgb_player_map_masked(game_window):
-    #                 H  S  V
-    lower = RED_PLAYER_LOWER
-    upper = RED_PLAYER_UPPER
+
+def rgb_player_map_masked(game_window, lower=RED_PLAYER_MARKER_MASK_LOWER, upper=RED_PLAYER_MARKER_MASK_UPPER):
     game_window = cv2.cvtColor(game_window, cv2.COLOR_RGB2HSV)
     mask = cv2.inRange(game_window, lower, upper)
     # print("min", game_window.min(), "max", game_window.max())
