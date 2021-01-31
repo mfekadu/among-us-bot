@@ -1,5 +1,7 @@
 import json
 
+import cv2
+
 from .common import get_map_data_path, get_player_marker_path
 from .constants import (
     BLACK_PLAYER_MARKER_FILENAME,
@@ -25,6 +27,13 @@ def read_map_data(filename=SKELD_FILENAME):
         return json.load(f)
 
 
+def read_image_as_numpy(filepath):
+    print(f"read_image_as_numpy: {filepath}")
+    # https://stackoverflow.com/questions/7762948/how-to-convert-an-rgb-image-to-numpy-array
+    return cv2.imread(filepath, cv2.IMREAD_COLOR)
+
+
 def read_player_marker_image(filename=RED_PLAYER_MARKER_FILENAME):
+    print(f"read_player_marker_image {filename}")
     path = get_player_marker_path(filename)
-    return cv2.imread(path, cv2.IMREAD_COLOR)
+    return read_image_as_numpy(path)
