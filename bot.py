@@ -7,6 +7,10 @@ import pytesseract
 import navigate
 import tasks
 from pytesseract import Output
+from grabwindow import grab_window
+
+# debugging
+import inspect
 
 tasks_loc = [
         ["Align Engine (Upper Engine)", (273, 355), tasks.align_engine_output],#
@@ -68,8 +72,10 @@ tasks_loc = [
 
 class Bot:
     def __init__(self):
-        self.name = "Aphrx"
+        print("frame", inspect.currentframe().f_code.co_name)
+        self.name = "disco"
         self.tasks = None
+        print("self", self)
 
     def menu(self):
         print("What would you like to do?")
@@ -90,22 +96,24 @@ class Bot:
             self.find_me()
 
     def find_me(self):
-        c = pyautogui.locateOnScreen('map_character.png', grayscale=True, confidence=.65)
-        pyautogui.moveTo(c)
+        print("frame", inspect.currentframe().f_code.co_name)
+
+        # c = pyautogui.locateOnScreen('map_character.png', grayscale=True, confidence=.65)
+        # pyautogui.moveTo(c)
 
     def startup(self):
+        print("frame", inspect.currentframe().f_code.co_name)
         time.sleep(2)
-        self.scale_percent = 100 # percent of original size
-        self.width = int(1920 * self.scale_percent / 100)
-        self.height = int(1080 * self.scale_percent / 100)
+        self.width = 1920
+        self.height = 1080
         self.dim = (self.width, self.height)
-        self.select_screen()
-        self.read_map()
+        img = grab_window("Among Us")
+        self.read_map(img)
 
-    def read_map(self):
+    def read_map(self, img):
+        print("frame", inspect.currentframe().f_code.co_name)
         while True:
             pyautogui.press("tab")
-            img = ImageGrab.grab(bbox=(0,0 ,1920,1080))
             pix = img.load()
             task = None
             for t in tasks_loc:
@@ -118,9 +126,6 @@ class Bot:
                 pyautogui.press("tab")
                 if result is 1:
                     self.perform_task(task)
-
-    def select_screen(self):
-        pyautogui.click(int(self.width/2), int(self.height/2))
 
     def perform_task(self, task):
         if task[0] != "Unlock Manifolds":

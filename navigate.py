@@ -6,6 +6,9 @@ import cv2
 import numpy as np
 import random
 
+# debugging
+import inspect
+
 marker = (198, 17, 17)
 marker_arrived = (228, 132, 10)
 tasks = [
@@ -76,6 +79,7 @@ def get_screen():
     return img, pix
 
 def pathfinding(i):
+    print("frame", inspect.currentframe().f_code.co_name)
     img_map_pix = Image.open('result_test_2.jpg')
     destination = tasks[i][1]
     print(tasks[i][0])
@@ -84,38 +88,38 @@ def pathfinding(i):
     img=Image.fromarray(img_map)
     pix_map = img_map_pix.load()
 
-    imgGrab = ImageGrab.grab(bbox=(0,0,1920,1080))
-    img = np.array(imgGrab)
-    img[467:655, 836:984] = [0, 0, 0]
-    img[504:553, 1055:1216] = [0, 0, 0]
-    img[560:600, 628:837] = [0, 0, 0]
+    # imgGrab = ImageGrab.grab(bbox=(0,0,1920,1080))
+    # img = np.array(imgGrab)
+    # img[467:655, 836:984] = [0, 0, 0]
+    # img[504:553, 1055:1216] = [0, 0, 0]
+    # img[560:600, 628:837] = [0, 0, 0]
     
-    colors = [(198, 17, 17), (228, 132, 10), (101, 7, 46), (149, 202, 220), (174, 116, 27), (224, 116, 9)]
+    # colors = [(198, 17, 17), (228, 132, 10), (101, 7, 46), (149, 202, 220), (174, 116, 27), (224, 116, 9)]
     
-    x = 0
-    y = 0
+    # x = 0
+    # y = 0
 
-    for color in colors:
-        Y,X = np.where(np.all(img==color, axis=2))
-        for i in range(len(X)):
-            xt = int(X[i]/2)
-            yt = int(Y[i]/2)
-            print(str(xt) + ", " + str(yt))
-            if pix_map[xt, yt] > (200, 200, 200):
-                x = xt
-                y = yt
-                break
+    # for color in colors:
+    #     Y,X = np.where(np.all(img==color, axis=2))
+    #     for i in range(len(X)):
+    #         xt = int(X[i]/2)
+    #         yt = int(Y[i]/2)
+    #         print(str(xt) + ", " + str(yt))
+    #         if pix_map[xt, yt] > (200, 200, 200):
+    #             x = xt
+    #             y = yt
+    #             break
     
-    if x == 0:
-        print("Can't find") 
-        return 0
+    # if x == 0:
+    #     print("Can't find") 
+    #     return 0
 
-    path, directions = search((x, y), destination, img_map, pix_map)
+    # path, directions = search((x, y), destination, img_map, pix_map)
 
-    for i in path:
-        img_map[i[1], i[0]] = (0, 255, 0)
+    # for i in path:
+    #     img_map[i[1], i[0]] = (0, 255, 0)
 
-    return navigate(path, directions, img_map, destination)
+    # return navigate(path, directions, img_map, destination)
 
     
 

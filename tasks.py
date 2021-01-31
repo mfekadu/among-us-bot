@@ -109,6 +109,7 @@ def troubleshoot():
         print(pyautogui.position())
 
 def start_task():
+    print("frame", inspect.currentframe().f_code.co_name)
     pyautogui.moveTo(1800, 930)
     pyautogui.click()
     time.sleep(1)
