@@ -23,6 +23,7 @@ from .constants import (
 
 
 def write_map_data(data, filename=SKELD_FILENAME):
+    print("write_map_data", filename)
     with open(get_map_data_path(filename), "w") as f:
         return json.dump(data, f)
 

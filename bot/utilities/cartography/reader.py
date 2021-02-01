@@ -23,6 +23,7 @@ from .constants import (
 
 
 def read_map_data(filename=SKELD_FILENAME):
+    print("write_map_data", filename)
     with open(get_map_data_path(filename), "r") as f:
         return json.load(f)
 

@@ -55,7 +55,7 @@ def __grab_window_bbox_and_setup_nicely_on_screen(name="Among Us", fps=FPS_30):
 
 def __grab_window_image(name="Among Us", fps=FPS_30):
     bbox = __grab_window_bbox_and_setup_nicely_on_screen(name, fps)
-    print(fps)
+    # print("fps", fps)
     time.sleep(fps)
     img = ImageGrab.grab(bbox)
     # img.show() # for debugging
