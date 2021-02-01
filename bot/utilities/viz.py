@@ -1,0 +1,4 @@
+from cartography.constants import SKELD_FILENAME
+from cartography.visualizer import visualize_map_data
+
+visualize_map_data(SKELD_FILENAME)

@@ -89,6 +89,11 @@ def locateInGameWindow(game_window, game_window_masked, template, threshold=0.65
     return ([top_left_x], [top_left_y])
 
 
+
+
+
+
+
 for i in range(10000):
     try:
         game_window = grab_window_rgb("Among Us", CONFIG["fps"])
